@@ -1,0 +1,175 @@
+{% extends 'demo/base.html' %}
+
+
+{% block title %}{% endblock %}
+
+{% block content %}
+
+<style type="text/css">
+
+  .jumbotron {
+    /*height: 350px;*/
+    border-radius: 15px;
+    color: white;
+    /*text-shadow: blue 0 4px 1px;*/
+    /*background:rgba(192, 192, 192, 0.1);*/
+    background:transparent;
+  }
+
+  .title-text {
+    text-shadow: #000029 0 5px 1px;
+  }
+
+  .col-md-4  {
+    color: black;
+  }
+
+  .injumbotron {
+    width: 90%
+  }
+
+  #Intro {
+     top: 0;
+     padding-top: 0px;
+     position: absolute;
+     background-color: transparent;
+     /*height: 40px;*/
+     width: 100%;
+  }
+
+  .moneyCount {
+    border-radius: 10%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+
+    width: 36px;
+    height: 36px;
+    padding: 10px;
+    /*letter-spacing: -px;*/
+    background: white;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+
+    font: 24px Arial, sans-serif;
+  }
+
+body {
+    background: url('../static/demo/images/DogBackground.png');
+    /*padding-top: 50px;*/
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+</style>
+    
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+
+      <div class="jumbotron container">
+        <div class="container injumbotron">
+          <div class="title-text">
+            <h1 class="text-center">给您的狗狗每月一个惊喜!</h1>
+            <h2 class="text-center">免费试用</h2>
+          </div>
+          <div class="spacer"></div>
+          <div class="row">
+            <div class='col-md-1'>
+            </div>
+            <div class='col-md-7' >
+              </br></br></br>
+              <a class="btn btn-primary btn-lg" href="/subscribe/" role="button">立即预定 &raquo;</a>
+              <a class="btn btn-primary btn-lg" href="/subscribe/" role="button">立即送礼 &raquo;</a>
+            </div>
+            <div class="col-md-4">
+              <h3>
+                <span style="color:black">累计向宠物慈善组织捐助: 
+                <br><br>
+                <span class="moneyCount">¥</span>
+                <span class="moneyCount">1</span>
+                <span class="moneyCount">2</span>
+                <span class="moneyCount">3</span>
+                .
+                <span class="moneyCount">2</span>
+                <span class="moneyCount">2</span></span>
+              </h3>
+            </div>
+          </div>
+
+        </div><!-- container -->
+      </div><!-- jumbotron -->
+
+    <div class="spacer"></div>
+
+
+
+
+
+    <div class="backgroundWhite">
+      <div class="container">
+        <div class="spacer"></div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <img src="/static/demo/images/scroll.gif">
+          </div>
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <img src="/static/demo/images/instruction1.png" style="height: 180px; width:150">
+                <p>我们提供了一个月、三个月与六个月的订购方案！完全免运费！可随时取消或续订！ </p>
+              </div>
+              <div class="col-md-6">
+                <img src="/static/demo/images/instruction1.png" style="height: 180px; width:150">
+                <p>我们提供了一个月、三个月与六个月的订购方案！完全免运费！可随时取消或续订！</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <img src="/static/demo/images/instruction1.png" style="height: 180px; width:150">
+                <p>我们提供了一个月、三个月与六个月的订购方案！完全免运费！可随时取消或续订！</p>
+              </div>
+              <div class="col-md-6">
+                <img src="/static/demo/images/instruction1.png" style="height: 180px; width:150">
+                <p>我们提供了一个月、三个月与六个月的订购方案！完全免运费！可随时取消或续订！</p>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="spacer"></div>
+
+
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-md-4">
+            <h2>宝盒订阅说明</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <h2>1.选择体型</h2>
+            <p>选择毛宝贝的体型，我们会依照毛宝贝的体型来配出最适合牠的宝盒！ </p>
+            <img src="/static/demo/images/instruction1.png" class="img-thumbnail">
+          </div>
+          <div class="col-md-4">
+            <h2>2.选择订阅期</h2>
+            <p>我们提供了一个月、三个月与六个月的订购方案！完全免运费！可随时取消或续订！</p>
+            <img src="/static/demo/images/instruction2.png" class="img-thumbnail">
+         </div>
+          <div class="col-md-4">
+            <h2>3.期待每月的惊喜</h2>
+            <p>礼盒会在每月15号寄出！准备与狗宝贝一起迎接[派星宝盒]带来的互动新体验吧!</p>
+            <img src="/static/demo/images/instruction3.png" class="img-thumbnail">
+          </div>
+        </div>
+        <div class="spacer"></div>
+
+      </div> <!-- /container -->
+    </div> <!--white background-->
+
+
+{% endblock %}

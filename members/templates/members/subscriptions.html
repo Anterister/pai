@@ -1,0 +1,27 @@
+{% extends 'members/memberIndex.html' %}
+
+{% block memberpage_content %}
+<!-- <div class="container memberContent"> -->
+	<!-- find a better way of inserting empty space... -->
+	<div class="spacer"></div> 
+	<!-- <ul> -->
+    {% for subscription in subscriptions_list %}
+        	<div class="col-md-4">
+            <a href="{{subscription.id}}/" class="thumbnail">
+        	  {% if subscription.subscription_size = "S" %}
+              		<img src="/static/demo/images/sDog_.png" alt="..." class="img-thumbnail">
+              {% elif subscription.subscription_size == "M" %}
+              		<img src="/static/demo/images/mDog_.png" alt="..." class="img-thumbnail">
+              {% else %}
+              		<img src="/static/demo/images/lDog_.png" alt="..." class="img-thumbnail">
+              {% endif %}
+            </a>
+            <h5 class="text-center"> 
+        		  {{ subscription.pet_name }}, 订阅期{{ subscription.subscription_plan }}个月
+        	  </h5>
+
+          </div>
+    {% endfor %}
+    <!-- </ul> -->
+</div>
+{% endblock %}

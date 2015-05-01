@@ -1,0 +1,101 @@
+{% extends 'demo/base.html' %}
+
+
+{% block title %}{% endblock %}
+
+{% block content %}
+<style type="text/css">
+  .bg {
+    background: url('https://d27xh99bselt60.cloudfront.net/assets/puppy-bernese.jpg') no-repeat center center;
+    position: fixed;
+    width: 100%;
+    height: 350px; /*same height as jumbotron */
+    top:0;
+    left:0;
+    z-index: -1;
+  }
+
+  .jumbotron {
+    height: 350px;
+    color: white;
+    text-shadow: #444 0 1px 1px;
+    background:rgba(192, 192, 192, 0.5); ;
+  }
+
+.col-md-4  {
+color: white;
+}
+
+body {
+    background: url('https://d27xh99bselt60.cloudfront.net/assets/puppy-bernese.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+</style>
+    
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h2>每個月將送一箱專屬於狗狗的寵愛禮盒到您府上!</h2>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">立即预定 &raquo;</a>
+           <a class="btn btn-primary btn-lg" href="#" role="button">立即送礼 &raquo;</a></p>
+	<p><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button></p>
+	
+         <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+           <div class="modal-content">
+
+	    <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+             <h2 class="modal-title" id="myModalLabel">派星礼盒</h2>
+            </div>
+      
+            <div class="modal-body">
+             <p>加入我们的Email list！<br></p>
+
+<div class="container">
+        <form>
+          <div class="form-group">
+            <label for="subscriber-email" class="control-label">电子邮件:</label>
+            <input type="text" class="form-control" id="subscriber-email" placeholder="xiaoming@163.com">
+          </div>
+        </form>
+</div>
+             
+            </div>
+            <div class="modal-footer">
+            
+            </div>
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>用户图片1</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>用户图片2</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>用户图片3</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div>
+      </div>
+
+    </div> <!-- /container -->
+{% endblock %}

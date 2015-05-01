@@ -1,0 +1,34 @@
+{% extends 'demo/base.html' %}
+
+
+{% block title %}
+    {% if not user.is_authenticated %}
+    登录宝盒
+    {% else %}
+    欢迎回来
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+
+<style type="text/css">
+  .memberContent {
+    width: 50%;
+  }
+
+</style>
+
+  <div class="container memberContent">
+    <ul class="nav nav-tabs">
+      <li role="presentation"><a href="/members/">我的主页</a></li>
+      <li role="presentation"><a href="/members/subscriptions/">订购信息</a></li>
+      <li role="presentation"><a href="/members/invite/">邀请好友</a></li>
+    </ul>
+  </div>
+
+    {% block memberpage_content %}
+    {% endblock %}
+
+
+{% endblock %}

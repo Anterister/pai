@@ -1,0 +1,351 @@
+{% extends 'members/memberBase.html' %}
+
+{% block scripts %}
+<script>
+$(document).ready(function() {
+
+    // $('#signInForm').formValidation();
+    // $('#signUpForm').formValidation();
+
+    $('#resetPasswordForm').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            new_password: {
+                validators: {
+                    notEmpty: {
+                        message: '新密码不能为空'
+                    },
+                    callback: {
+                        message: '密码有误',
+                        callback: function(value, validator, $field) {
+                            if (value === '') {
+                                return true;
+                            }
+                            // Check the password strength
+                            if (value.length < 6) {
+                                return {
+                                    valid: false,
+                                    message: '密码最少为6位数'
+                                };
+                            } else {
+                                return {
+                                    valid: true,
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    $('#signUpForm').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    },
+                    callback: {
+                        message: '密码有误',
+                        callback: function(value, validator, $field) {
+                            if (value === '') {
+                                return true;
+                            }
+                            // Check the password strength
+                            if (value.length < 6) {
+                                return {
+                                    valid: false,
+                                    message: '密码最少为6位数'
+                                };
+                            } else {
+                                return {
+                                    valid: true,
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    {% if member_login_isPOST %}
+        $("#signinalert").show();
+    {% else %}
+        $("#signinalert").hide();
+    {% endif %}
+
+
+    {% if member_register_isPOST %}
+        $("#signupalert").show();
+    {% else %}
+        $("#signupalert").hide();
+    {% endif %}
+
+    {% if member_resetpwd_isPOST %}
+        $("#resetAlert").show();
+    {% else %}
+        $("#resetAlert").hide();
+    {% endif %}
+
+    // Remove active for all items.
+    $('.nav-tabs li').removeClass('active');
+    $('.dropdown-menu li').removeClass('active');
+    $('a[href="' + this.location.pathname + '"]').parent().addClass('active');
+    console.debug(this.location.pathname);
+});
+
+
+
+</script>
+{% endblock %}
+
+{% block content %}
+
+
+<style type="text/css">
+  .memberContent {
+    width: 70%;
+  }
+
+</style>
+
+
+<div class="container">
+{% if not user.is_authenticated %}
+
+    <div class="container" id="logincontainer">    
+    {% if not member_register_isPOST %}
+    <div id="loginbox" style= "margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"> 
+    {% else %} 
+    <div id="loginbox" style= "display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    {% endif %}
+
+                      
+        <div class="panel panel-info" >
+            <div class="panel-heading">
+                <div class="panel-title">已有帐号?</div>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">忘记密码?</a></div>
+            </div>     
+
+            <div style="padding-top:30px" class="panel-body" >
+
+                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                <form id="signInForm" class="form-horizontal" role="form" method="post" action="."
+                data-fv-framework="bootstrap"
+                data-fv-icon-valid="glyphicon glyphicon-ok"
+                data-fv-icon-invalid="glyphicon glyphicon-remove"
+                data-fv-icon-validating="glyphicon glyphicon-refresh" >
+                    
+
+                    <div id="signinalert" class="alert alert-warning" style="display:none" role="alert">
+                        {{ member_login_message }}
+                    </div>
+
+                    {% csrf_token %}
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="注册邮箱"
+                        
+                        />                                        
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input id="login-password" type="password" class="form-control" name="password" placeholder="请输入密码"
+                        
+                        />
+                    </div>
+
+                    <div class="input-group">
+                        <div class="checkbox">
+                            <label>
+                            <input id="login-remember" type="checkbox" name="remember" value="1"> 下次自动登录
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:10px" class="form-group">
+                    <!-- Button -->
+                      <div class="col-sm-12 controls">
+                        <input id="btn-login" type="submit" href="" class="btn btn-success" value="登录">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 control">
+                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >还没有宝盒账号? 
+                                <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">点击注册</a>
+                            </div>
+                        </div>
+
+
+                    </div>    
+                </form>     
+            </div>                     
+        </div>  
+    </div>
+</div>
+
+    {% if not member_register_isPOST %}
+    <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    {% else %}
+    <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    {% endif %}
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">注册</div>
+                <div style="float:right; font-size: 85%; position: relative; top:-10px">
+                    <a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">登录</a>
+                </div>
+            </div>  
+            <div class="panel-body" >
+                <form id="signUpForm" class="form-horizontal" role="form" action="/members/register/" method="post">
+
+                {% csrf_token %}
+
+                <div id="signupalert" style="display:none" class="alert alert-danger">
+                    {{ member_register_message }}
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="email" class="col-md-3 control-label">邮箱</label>
+                    <div class="col-md-9">
+                        <input class="form-control" name="email" type="email" 
+                        data-fv-emailaddress-message="邮箱格式有误"
+                        required
+                        data-fv-notempty-message="请输入邮箱地址" 
+                        placeholder="xiaoming@pet.com" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">密码</label>
+                    <div class="col-xs-5">
+                        <input type="password" class="form-control" name="password" placeholder="密码最少为6位"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">确认密码</label>
+                    <div class="col-xs-5">
+                        <input type="password" class="form-control" name="confirmPassword"
+                            data-fv-identical="true"
+                            data-fv-identical-field="password"
+                            data-fv-identical-message="两次输入不一致" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="icode" class="col-md-3 control-label">邀请码</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="icode" placeholder="8位数邀请码">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <!-- Button -->                                      
+                    <div class="col-md-offset-3 col-md-9">
+                        <input id="btn-signup" type="submit" class="btn btn-info" value="注册">
+                        <!-- <span style="margin-left:8px;">or</span>   -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+ 
+{% else %}
+    <div class="container memberContent">
+        <ul class="nav nav-tabs">
+          <li role="presentation"><a href="/members/">我的主页</a></li>
+          <li role="presentation"><a href="/members/subscriptions/">订购信息</a></li>
+          <li role="presentation"><a href="/members/invite/">邀请好友</a></li>
+        </ul>
+
+        {% block memberpage_content %}
+            <div class="container ">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="row spacer"></div>
+                        <h3 class="text-left">个人信息</h3>
+
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row spacer"></div>
+                        
+                        <div id="resetAlert" class="alert alert-warning" role="alert" style="display:none">
+                            {{ resetpwd_msg }}
+                        </div>
+
+                        <h3 class="text-left">修改密码</h3>
+                        <form id="resetPasswordForm" action="resetPassword/" method="post" class="form-horizontal" role='form'>
+                        {% csrf_token %}
+                            <fieldset>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                              <label class="col-sm-4 control-label" for="textinput">当前密码</label>
+                              <div class="col-sm-6">
+                              <input type="password" placeholder="请输入当前密码" class="form-control" name="old_password"
+                              required
+                              data-fv-notempty-message="请输入当前密码" >
+                              </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                              <label class="col-sm-4 control-label" for="textinput">新密码</label>
+                              <div class="col-sm-6">
+                              <input type="password" placeholder="请输入新密码" class="form-control" name="new_password">
+                              </div>
+                            </div>
+
+                            <!-- Text input-->
+                            <div class="form-group">
+                              <label class="col-sm-4 control-label" for="textinput">确认新密码</label>
+                              <div class="col-sm-6">
+                              <input type="password" placeholder="再次输入新密码" class="form-control" name="new_password2"
+                              data-fv-identical="true"
+                              data-fv-identical-field="new_password"
+                              data-fv-identical-message="两次输入不一致">
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <div class="col-sm-offset-2 col-sm-10">
+                                <div class="pull-right">
+                                  <button type="submit" value="修改密码" class="btn btn-primary">修改密码</button>
+                                </div>
+                              </div>
+                            </div>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}
+ 
+{% endif %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load bootstrap3 %}
+<html{% if request.LANGUAGE_CODE %} lang="{{ request.LANGUAGE_CODE }}"{% endif %}>
+
+<head>
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block bootstrap3_title %}django-bootstrap3 template title{% endblock %}</title>
+    {% bootstrap_css %}
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- {% if 'javascript_in_head'|bootstrap_setting %}{% bootstrap_javascript jquery=True %}{% endif %}
+    {% block bootstrap3_extra_head %}{% endblock %} -->
+
+    <link rel="stylesheet" href="/static/vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/formValidation/css/formValidation.min.css"/>
+
+    <!-- Custom Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/static/dist/css/font-awesome.min.css" type="text/css">
+
+
+    
+    <script type="text/javascript" src="/static/vendor/jquery/jquery.min.js"></script>
+
+    <script type="text/javascript" src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--form validation-->
+    <script type="text/javascript" src="/static/formValidation/js/formValidation.min.js"></script>
+
+    <!--this js is for form validation-->
+    <script type="text/javascript" src="/static/formValidation/js/framework/bootstrap.js"></script>
+
+
+{% block base_scripts %}
+    <script>
+      $(document).ready(function() {
+        $('.navbar-nav li').removeClass('active');
+        $('a[href="/' + this.location.pathname.split("/")[1] + '/"]').parent().addClass('active');
+        // console.debug(this.location.pathname);
+        // console.debug(this.location.pathname.split("/")[1]);
+      });
+    </script>
+{% endblock %}
+{% block scripts %}
+{% endblock %}
+
+</head>
+
+<body>
+{% block bootstrap3_content %}django-bootstrap3 template content{% endblock %}
+{% if not 'javascript_in_head'|bootstrap_setting %}{% bootstrap_javascript jquery=True %}{% endif %}
+{% block bootstrap3_extra_script %}{% endblock %}
+</body>
+
+</html>

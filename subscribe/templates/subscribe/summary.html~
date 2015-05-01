@@ -1,0 +1,480 @@
+{% extends 'demo/base.html' %}
+
+{% block scripts %}
+<script>
+
+$(document).ready(function() {
+
+    $('#subscriptionForm').formValidation({
+        framework: 'bootstrap',
+    });
+
+    $('#signUpForm').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    },
+                    callback: {
+                        message: '密码有误',
+                        callback: function(value, validator, $field) {
+                            if (value === '') {
+                                return true;
+                            }
+                            // Check the password strength
+                            if (value.length < 6) {
+                                return {
+                                    valid: false,
+                                    message: '密码最少为6位数'
+                                };
+                            } else {
+                                return {
+                                    valid: true,
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    {% if member_login_isPOST %}
+        $("#signinalert").show();
+    {% else %}
+        $("#signinalert").hide();
+    {% endif %}
+
+
+    {% if member_register_isPOST %}
+    // $('#loginbox').hide();
+        $("#signupalert").show();
+    {% else %}
+        $("#signupalert").hide();
+
+    // $('#signinbox').hide();
+    {% endif %}
+
+    // Remove active for all items.
+    $('.nav-tabs li').removeClass('active');
+    $('.dropdown-menu li').removeClass('active');
+    $('a[href="' + this.location.pathname + '"]').parent().addClass('active');
+});
+
+
+
+</script>
+{% endblock %}
+
+{% block title %}您的订单{% endblock %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'subscribe/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="/static/bootstrap-datepicker/css/datepicker.css" />
+<script src="/static/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/static/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
+
+
+<style type="text/css">
+
+.jumbotron {
+    color: white;
+    text-shadow: #444 0 1px 1px;
+    background:rgba(192, 192, 192, 0.5); ;
+}
+
+.summaryBox  {
+    color: black;
+    background-color: #F8F8F8;
+    border-radius: 5px;
+}
+
+.col-md-8  {
+    color: black;
+    background-color: #F8F8F8;
+    border-radius: 5px;
+}
+</style>
+
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="container">
+  <div class="jumbotron container">
+    <div class="row">
+      <div class="col-md-3 summaryBox">
+        <div class="row spacer"></div>
+        
+        <img src="/static/demo/images/checkoutSummary.png">
+        </img>
+        <p class="text-center">订购总结</p>
+        <h4 class="text-left">{{ dog_size }}</h4>
+        <h4 class="text-left">{{ subscribe_plan }}</h4>
+        <h4 class="text-left">¥ {{ subscribe_price }}</h4>
+        <h5 class="text-right"><span style="color:green">免运费哦亲</span></h5>
+        <div class="row spacer"></div>
+    </div>
+    <div class="col-md-1"><p></p></div>
+
+    {% if user.is_authenticated %}
+    <div class="col-md-8">
+        <div class="row spacer"></div>
+        <form id="subscriptionForm" action="submit/" method="post" class="form-horizontal" role='form'>
+            {% csrf_token %}
+        <fieldset>
+
+          <!-- Form Name -->
+          <legend>送货信息</legend>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">收件人姓名</label>
+            <div class="col-sm-4">
+              <input type="text" placeholder="收件人姓名" class="form-control" name="s_name"
+              required
+              data-fv-notempty-message="请输入收件人姓名">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">收件人电话</label>
+            <div class="col-sm-4">
+              <input type="text" placeholder="常用手机/电话" class="form-control" name="s_phonenumber"
+              required
+              data-fv-notempty-message="请输入收件人联系电话"
+              data-fv-phone="true"
+              data-fv-phone-country="CN"
+              data-fv-phone-message="请输入有效的11位电话号码">
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">详细地址</label>
+            <div class="col-sm-10">
+              <input type="text" placeholder="收货地址请精确到门牌号、楼层" class="form-control" name="s_address"
+              required
+              data-fv-notempty-message="请输入地址"
+              >
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">城市</label>
+            <div class="col-sm-4">
+              <input type="text" placeholder="City" class="form-control" name="s_city"
+              required
+              data-fv-notempty-message="请输入城市">
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">省份</label>
+            <div class="col-sm-4">
+              <input type="text" placeholder="State" class="form-control" name="s_province"
+              >
+            </div>
+
+            <label class="col-sm-2 control-label" for="textinput">邮编</label>
+            <div class="col-sm-4">
+              <input type="text" placeholder="Post Code" class="form-control" name="s_zipcode"
+              required
+              data-fv-notempty-message="请输入邮编">
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">特殊说明</label>
+            <div class="col-sm-10">
+              <input type="text" placeholder="其他我们送货时需要注意的地方？" class="form-control" name="s_note">
+            </div>
+          </div>
+
+
+               
+          <span class="help-block">*目前只接受中国大陆境内的预订</span>
+          <div class="row spacer"></div>
+        </fieldset>
+
+        <fieldset>
+
+          <!-- Form Name -->
+          <legend>宠物信息（选填）</legend>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">宠物昵称</label>
+            <div class="col-sm-10">
+              <input type="text" placeholder="这位汪星人怎么称呼？" class="form-control" name="pet_name">
+            </div>
+          </div>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">宠物性别</label>
+            <div class="col-sm-4">
+              <select class="form-control" id="sel1" name="pet_gender">
+                <option value=''>---</option>
+                <option value='1'>男孩</option>
+                <option value='0'>女孩</option>
+              </select>
+            </div>
+
+            <label class="col-sm-2 control-label" for="textinput">宠物生日</label>
+            <div class="col-sm-4" >
+              <input type='text' placeholder="点击选择生日" class="form-control" id="petBirthdayPicker" name="pet_birthday"/>
+            </div>
+          </div>
+
+          <script type="text/javascript">
+            $(function () {
+              $('#petBirthdayPicker').datepicker({
+                language: 'zh-CN',
+                startView: 'decade',
+              });
+            });
+          </script>
+
+          <!-- Text input-->
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="textinput">品种</label>
+            <div class="col-sm-4">
+              <select class="form-control" id="breedSel" 
+              onchange="if (this.value == '0') {
+              $('#breedTextbox').removeClass('hide');} else {
+              $('#breedTextbox').addClass('hide');}
+              " name="pet_breed">
+                <option value=''>---</option>
+                <option value='1'>吉娃娃</option>
+                <option value='2'>金毛</option>
+                <option value='0'>其他</option>
+              </select>
+            </div> 
+
+            <div class="col-sm-4 hide" id='breedTextbox'>
+              <input type='text' placeholder="请输入品种" class="form-control" id="petBirthdayPicker" name="pet_breed_type"/>
+            </div>
+
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="pull-right">
+                <button type="submit" value="提交订单" class="btn btn-primary">提交订单</button>
+              </div>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+      <div class="row spacer"></div>
+
+    </div>
+
+    {% else %}
+
+  <!-- DISPLAY THE LOGIN/REGISTER FORM -->  
+  <div class="container" id="logincontainer">    
+
+    <!-- Login Box -->  
+    {% if not member_register_isPOST %}
+    <div id="loginbox" style= "margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"> 
+    {% else %} 
+    <div id="loginbox" style= "display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    {% endif %}                
+        <div class="panel panel-info" >
+            <div class="panel-heading">
+                <div class="panel-title">已有帐号?</div>
+                <div style="float:right; font-size: 80%; position: relative; top:-10px">
+                  <a href="JavaScript:void(0)" onClick="$('#loginbox').hide(); $('#forgetpasswordbox').show()">忘记密码?</a>
+                </div>
+            </div>     
+
+            <div style="padding-top:30px" class="panel-body" >
+
+                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                <form id="signInForm" class="form-horizontal" role="form" method="post" action="."
+                data-fv-framework="bootstrap"
+                data-fv-icon-valid="glyphicon glyphicon-ok"
+                data-fv-icon-invalid="glyphicon glyphicon-remove"
+                data-fv-icon-validating="glyphicon glyphicon-refresh" >
+                    
+
+                    <div id="signinalert" class="alert alert-warning" style="display:none" role="alert">
+                        {{ member_login_message }}
+                    </div>
+
+                    {% csrf_token %}
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="注册邮箱"
+                        
+                        />                                        
+                    </div>
+
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input id="login-password" type="password" class="form-control" name="password" placeholder="请输入密码"
+                        
+                        />
+                    </div>
+
+                    <div class="input-group">
+                        <div class="checkbox">
+                            <label>
+                            <input id="login-remember" type="checkbox" name="remember" value="1"> 下次自动登录
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:10px" class="form-group">
+                    <!-- Button -->
+                      <div class="col-sm-12 controls">
+                        <input id="btn-login" type="submit" href="" class="btn btn-success" value="登录">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-12 control">
+                            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >还没有宝盒账号? 
+                                <a href="JavaScript:void(0)" onClick="$('#loginbox').hide(); $('#signupbox').show()">点击注册</a>
+                            </div>
+                        </div>
+
+
+                    </div>    
+                </form>     
+            </div>                     
+        </div>  
+    </div>  <!-- end loginbox -->
+
+    <!-- Signup Box -->  
+    {% if not member_register_isPOST %}
+    <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    {% else %}
+    <div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    {% endif %}
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">注册</div>
+                <div style="float:right; font-size: 85%; position: relative; top:-10px">
+                    <a id="signinlink" href="JavaScript:void(0)" onclick="$('#signupbox').hide(); $('#loginbox').show()">登录</a>
+                </div>
+            </div>  
+            <div class="panel-body" >
+                <form id="signUpForm" class="form-horizontal" role="form" action="/members/register/" method="post">
+
+                {% csrf_token %}
+
+                <div id="signupalert" style="display:none" class="alert alert-danger">
+                    {{ member_register_message }}
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="col-md-3 control-label">邮箱</label>
+                    <div class="col-md-9">
+                        <input class="form-control" name="email" type="email" 
+                        data-fv-emailaddress-message="邮箱格式有误"
+                        required
+                        data-fv-notempty-message="请输入邮箱地址" 
+                        placeholder="xiaoming@pet.com" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">密码</label>
+                    <div class="col-xs-5">
+                        <input type="password" class="form-control" name="password" placeholder="密码最少为6位"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">确认密码</label>
+                    <div class="col-xs-5">
+                        <input type="password" class="form-control" name="confirmPassword"
+
+                            data-fv-identical="true"
+                            data-fv-identical-field="password"
+                            data-fv-identical-message="密码不一致" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="icode" class="col-md-3 control-label">邀请码</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="icode" placeholder="8位数邀请码">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <!-- Button -->                                      
+                    <div class="col-md-offset-3 col-md-9">
+                        <input id="btn-signup" type="submit" class="btn btn-info" value="注册">
+                        <!-- <span style="margin-left:8px;">or</span>   -->
+                    </div>
+                </div>
+              </form>
+            </div>
+        </div>
+    </div> <!-- end signupbox -->
+
+    <!-- ForgetPassword Box -->  
+    <div id="forgetpasswordbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="panel panel-info" >
+            <div class="panel-heading">
+                <div class="panel-title">忘记密码?</div>
+		<div style="float:right; font-size: 80%; position: relative; top:-10px">
+                  <a href="JavaScript:void(0)" onClick="$('#forgetpasswordbox').hide(); $('#loginbox').show();">返回</a>
+                </div>
+            </div>     
+
+            <div style="padding-top:30px" class="panel-body" >
+
+                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                <form id="forgetPasswordForm" class="form-horizontal" role="form" method="post" action="."
+                data-fv-framework="bootstrap"
+                data-fv-icon-valid="glyphicon glyphicon-ok"
+                data-fv-icon-invalid="glyphicon glyphicon-remove"
+                data-fv-icon-validating="glyphicon glyphicon-refresh" >
+                    
+
+                    <div id="signinalert" class="alert alert-warning" style="display:none" role="alert">
+                        {{ member_forgetPassword_message }}
+                    </div>
+
+                    {% csrf_token %}
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="注册邮箱"/>                                        
+                    </div>
+
+                    <div style="margin-top:10px" class="form-group">
+                    <!-- Button -->
+                      <div class="col-sm-12 controls">
+                        <input id="btn-login" type="submit" href="" class="btn btn-success" value="找回密码">
+                      </div>
+                    </div>   
+                </form>     
+            </div>                     
+        </div>  
+    </div> 
+
+    {% endif %}
+</div>
+</div>
+
+</div> <!-- /container -->
+{% endblock %}

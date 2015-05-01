@@ -1,0 +1,55 @@
+{% extends 'members/memberBase.html' %}
+
+{% block scripts %}
+<script>
+  $(document).ready(function() {
+    // Remove active for all items.
+    $('.nav-tabs li').removeClass('active');
+    $('.dropdown-menu li').removeClass('active');
+    $('a[href="/members/subscriptions/"]').parent().addClass('active');
+  });
+</script>
+{% endblock %}
+
+{% block memberpage_content %}
+<div class="container memberContent">
+	<div class="spacer"></div>
+
+    <div class="col-md-4">
+      {% if subscription.subscription_size == "S" %}
+        <img src="/static/demo/images/sDog.png" alt="..." class="img-thumbnail">
+        <p class="text-center">小型犬</p>
+      {% elif subscription.subscription_size == "M" %}
+        <img src="/static/demo/images/mDog.png" alt="..." class="img-thumbnail">
+        <p class="text-center">中型犬</p>
+      {% else %}
+        <img src="/static/demo/images/lDog.png" alt="..." class="img-thumbnail">
+        <p class="text-center">大型犬</p>
+      {% endif %}
+    </div>
+
+    <div class="col-md-7">
+      <a><p class="text-right">修改信息</p></a>
+      
+      <div>
+        <legend>{{ subscription.pet_name }}的派星礼盒</legend>
+        <p>订阅期: {{ subscription.subscription_plan }}个月</p>
+        <p>狗狗性别: {{ subscription.pet_gender }}</p>
+        <p>狗狗生日: {{ subscription.pet_birthday }}</p>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div>
+        <legend>送货信息</legend>
+        <p>主人名字: {{ subscription.s_name }}</p>
+        <p>收货地址: {{ subscription.s_address }}</p>
+        <p>收货城市: {{ subscription.s_city }}</p>
+        <p>收货省份: {{ subscription.s_province }}</p>
+        <p>邮编: {{ subscription.s_postcode }}</p>
+        <p>特殊说明: {{ subscription.s_note }}</p>
+      </div>
+    </div>
+</div>
+
+{% endblock %}
