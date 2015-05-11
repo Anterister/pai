@@ -8,14 +8,23 @@ from django.http import HttpResponseRedirect
 # Create your views here.
 
 def index(request):
+	# print request.COOKIES
 	return render(request, 'subscribe/index.html')
 
 
 def plan(request, size):
+	# print request.COOKIES
 	return render(request, 'subscribe/plan.html')
 
 def summary(request, size, plan):
 	c = {'member_login_isPOST' : False}
+	# print request.COOKIES
+
+	if 'anafero-referral' in request.COOKIES:
+		c['from_refer'] = True
+	else:
+		c['from_refer'] = False
+
 
 	c['subscribe_form'] = SubscriptionForm()
 	if (size == 'S'):
@@ -32,8 +41,11 @@ def summary(request, size, plan):
 	elif plan == '6':
 		c['subscribe_plan'] = u'六个月'
 
-		# c['dog_size'] = request.POST
-	c['subscribe_price'] = 68
+	# TODO: first 500 boxes = 1 yuan
+	if 1 < 10:
+		c['subscribe_price'] = 1
+	else:
+		c['subscribe_price'] = 68
 
 	if (request.method == 'POST'):
 

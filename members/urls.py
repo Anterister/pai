@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-
+# from django.views.generic import TemplateView
 from members import views
 
 
@@ -11,4 +11,5 @@ urlpatterns = patterns('',
 	url(r'^subscriptions/$', views.show_subscriptions, name='member_subscriptions'),
 	url(r'^subscriptions/([0-9]+)/$', views.subscription_detail, name='subscription_detail'),
 	url(r'^resetPassword/', views.reset_password, name='reset_password'),
+	url(r'^refer/', views.refer, name="refer")
 	)

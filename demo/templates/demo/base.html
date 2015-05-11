@@ -90,20 +90,19 @@
 
 </style>
 
+<div id="IntroBackground" class="parallax-window">
+
 
 <div id="Intro" class="container">
   <div class="container">
-    <a><p class="text-right">
-      <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="$('#subscribeModal').show();$('#subscribeCompleteModal').hide();">兑换礼物</button> -->
+    <p class="text-right">
       <button type="button" class="btn btn-default" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="$('#subscribeModal').show();$('#subscribeCompleteModal').hide();">订阅派星宠物周刊</button>
-    </p></a>
+    </p>
   </div>
-
-  <div id='row'>
   <div class='container'>
     <div class='col-md-4 col-md-4-logo'>
       <a href="/home/" >
-        <img src="/static/demo/images/petyboxLogo.png" alt="..." height="40" width="360"></img>
+        <img src="/static/demo/images/petyboxLogo.png" alt="..." height="60" width="360"></img>
       </a>
     </div>
     <div class='col-md-8'>
@@ -137,7 +136,7 @@
                       <ul class="dropdown-menu" role="menu">
                         <li><a href="/members/">我的主页</a></li>
                         <li><a href="/members/subscriptions/">订购信息</a></li>
-                        <li><a href="/members/invite/">邀请好友</a></li>
+                        <li><a href="/members/refer/">邀请好友</a></li>
                         <li class="divider"></li>
                         <li><a href="/members/logout">注销</a></li>
                       </ul>
@@ -163,7 +162,7 @@
 
 </div>
 
-</div>
+<!-- </section> -->
 
   <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -203,7 +202,7 @@
 
              </div><!-- modal-content -->
            </div>
-          </div>
+  </div>
 
 
 
@@ -220,11 +219,18 @@
 
         {% block content %}(no content){% endblock %}
       
-      
+    
+
+</div>
+
+      {% block extra_content %}
+      {% endblock %}
+
       <div class="container backgroundWhite">
         <hr>
+
       <footer>
-        <div class="container"><p class="text-muted text-center"> &copy;派-宠物时尚 2014-2015 | petybox.com   •   沪ICP备15019200号-1   •   服务专线: 4006-822-### (免长途费) </p></div>
+        <div class="container"><p class="text-muted text-center"> &copy;派-宠物时尚-上海风渡电子商务有限公司 2014-2015 | petybox.com   •   沪ICP备15019200号-1  </p></div>
       </footer>
     </div>
     
@@ -235,6 +241,7 @@
 
      Custom Theme JavaScript 
     <script src="/static/dist/js/creative.js"></script>-->
+    <script src="/static/parallax/parallax.js"></script>
     
     <script type="text/javascript" data-cfasync="false">(function () { var done = false;var script = document.createElement('script');script.async = true;script.type = 'text/javascript';script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript';document.getElementsByTagName('HEAD').item(0).appendChild(script);script.onreadystatechange = script.onload = function (e) {if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {var w = new PCWidget({ c: '412ccee9-d8e1-44a3-957d-e5f6b5fa7568', f: true });done = true;}};})();
     </script>

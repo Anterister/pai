@@ -127,7 +127,11 @@ $(document).ready(function() {
         <p class="text-center">订购总结</p>
         <h4 class="text-left">{{ dog_size }}</h4>
         <h4 class="text-left">{{ subscribe_plan }}</h4>
+        {% if from_refer %}
+          <h5 class="text-left">朋友邀请 - 赠额外一个月免费宝盒</h5>
+        {% endif %}
         <h4 class="text-left">¥ {{ subscribe_price }}</h4>
+        
         <h5 class="text-right"><span style="color:green">免运费哦亲</span></h5>
         <div class="row spacer"></div>
     </div>

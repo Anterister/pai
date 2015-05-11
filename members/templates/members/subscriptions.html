@@ -22,6 +22,10 @@
 
           </div>
     {% endfor %}
+
+    {% if not subscriptions_list %}
+      <h4>还没有订阅宝盒噢，<a href="/subscribe/">点此前往</a></h4>
+    {% endif %}
     <!-- </ul> -->
-</div>
+<!-- </div> -->
 {% endblock %}

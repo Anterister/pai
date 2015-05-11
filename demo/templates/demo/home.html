@@ -4,15 +4,20 @@
 {% block title %}{% endblock %}
 
 {% block content %}
+<script>
+$(document).ready(function() {
+  $('.parallax-window').parallax({
+    imageSrc: '/static/demo/images/cover.jpg', 
+    speed:0.4
+  });
+});
+</script>
 
 <style type="text/css">
 
   .jumbotron {
-    /*height: 350px;*/
     border-radius: 15px;
     color: white;
-    /*text-shadow: blue 0 4px 1px;*/
-    /*background:rgba(192, 192, 192, 0.1);*/
     background:transparent;
   }
 
@@ -20,21 +25,21 @@
     text-shadow: #000029 0 5px 1px;
   }
 
-  .col-md-4  {
+  /*.col-md-4  {
     color: black;
-  }
+  }*/
 
   .injumbotron {
-    width: 90%
+    width: 90%;
   }
 
   #Intro {
-     top: 0;
-     padding-top: 0px;
-     position: absolute;
      background-color: transparent;
-     /*height: 40px;*/
-     width: 100%;
+  }
+
+  #IntroBackground { 
+    /*background: url('../static/demo/images/DogBackground_sm.png');*/
+    background-size:cover;
   }
 
   .moneyCount {
@@ -45,67 +50,74 @@
     height: 36px;
     padding: 10px;
     /*letter-spacing: -px;*/
-    background: white;
-    border: 2px solid #666;
-    color: #666;
+    background: rgba(200, 200, 200, 0.8);
+    border: 1px solid #666;
+    color: black;
     text-align: center;
 
     font: 24px Arial, sans-serif;
   }
 
 body {
-    background: url('../static/demo/images/DogBackground.png');
-    /*padding-top: 50px;*/
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    padding-top: 0px;
 }
 </style>
     
     <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="spacer"></div>
 
       <div class="jumbotron container">
+        <div class="spacer"></div>
         <div class="container injumbotron">
-          <div class="title-text">
-            <h1 class="text-center">给您的狗狗每月一个惊喜!</h1>
-            <h2 class="text-center">免费试用</h2>
-          </div>
           <div class="spacer"></div>
+            <h1 class="text-center title-text">给您的狗狗每月一个惊喜!</h1>
+          <div class="spacer"></div>
+
+
+          <p class="text-center"><a class="btn btn-primary btn-lg" href="/subscribe/" role="button">一元试用 &raquo;</a></p>
           <div class="row">
-            <div class='col-md-1'>
-            </div>
-            <div class='col-md-7' >
-              </br></br></br>
-              <a class="btn btn-primary btn-lg" href="/subscribe/" role="button">立即预定 &raquo;</a>
-              <a class="btn btn-primary btn-lg" href="/subscribe/" role="button">立即送礼 &raquo;</a>
-            </div>
-            <div class="col-md-4">
+            <div class='col-md-4'>
+              <h3 class="title-text">
+                累计向宠物慈善组织捐助: 
+              </h3>
               <h3>
-                <span style="color:black">累计向宠物慈善组织捐助: 
-                <br><br>
                 <span class="moneyCount">¥</span>
                 <span class="moneyCount">1</span>
                 <span class="moneyCount">2</span>
                 <span class="moneyCount">3</span>
                 .
                 <span class="moneyCount">2</span>
-                <span class="moneyCount">2</span></span>
+                <span class="moneyCount">2</span>
               </h3>
             </div>
+            <div class='col-md-4' >
+                        
+          <div class="progress">
+            <span style="color:black">剩余416个一元礼盒</span>
+            <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"
+            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:18%">
+              18%
+            </div>
           </div>
+           <!--  <h3 class="text-center">
+                已经送出86个一元礼盒
+            </h3> -->
+            </div>
+            <div class="col-md-4">
+
+            </div>
+          </div>
+
+          <div class="spacer"></div>
 
         </div><!-- container -->
       </div><!-- jumbotron -->
 
-    <div class="spacer"></div>
+    <!-- <div class="spacer"></div> -->
 
+{% endblock %}
 
-
-
+{% block extra_content %}
 
     <div class="backgroundWhite">
       <div class="container">
@@ -169,7 +181,16 @@ body {
         <div class="spacer"></div>
 
       </div> <!-- /container -->
-    </div> <!--white background-->
 
+
+      <hr>
+      <div class="container">
+        <wb:follow-button uid="5598604199" type="red_1" width="100" height="24" ></wb:follow-button>
+          <img src="/static/demo/images/icons/weibo.svg" alt="weibo">
+          <img src="/static/demo/images/icons/wechat.svg" alt="wechat">
+          <img src="/static/demo/images/icons/instagram.svg" alt="instagram">
+          <img src="/static/demo/images/icons/zhihu.svg" alt="zhihu">
+      </div>
+    </div> <!--white background-->
 
 {% endblock %}

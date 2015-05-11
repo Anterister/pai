@@ -91,6 +91,10 @@ def FAQ(request):
 def contact(request):
     return render(request, 'demo/contact.html')
 
+def refer(request):
+    print "refer gotten!"
+    return render(request, 'demo/FAQ.html')
+
 
 def handler404(request):
     response = render_to_response('404.html', {},

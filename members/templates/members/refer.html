@@ -1,0 +1,12 @@
+{% extends 'members/memberIndex.html' %}
+
+{% block memberpage_content %}
+<!-- <div class="container memberContent"> -->
+	<!-- find a better way of inserting empty space... -->
+	<div class="spacer"></div> 
+                            
+  <h4>您的专属邀请链接：</h4>                  
+  {{ user.userprofile.referral.url }}
+
+
+{% endblock %}

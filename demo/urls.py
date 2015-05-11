@@ -25,6 +25,8 @@ urlpatterns = patterns('',
     # url(r'^$', HomePageView.as_view(), name='home'),
     url(r'^$', views.index, name='index'),
 
+    url(r"^r/", include("anafero.urls")),
+
     url(r'^home/', views.home, name='home'),
 
     # url(r'^(?P<email_addr_in>[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/email_subscribe/$', 

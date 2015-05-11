@@ -1,6 +1,39 @@
 from django.db import models
 from django.forms import ModelForm
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+
+from anafero.models import Referral
+
+from django.db.models.signals import post_save
+
+
+
+
+class UserProfile(models.Model):
+	user = models.OneToOneField(User, primary_key=True)
+
+	# Other fields here
+	email_confirmed = models.BooleanField(default=False)
+	being_referred = models.BooleanField(default=False)
+	total_referrals = models.IntegerField(default=0)
+	avail_free_boxes = models.IntegerField(default=0)
+
+	referral = models.OneToOneField(Referral,default=None)
+
+    # TODO: add my dogs maybe??
+
+# create user profile function???
+def create_user_profile(sender, instance, created, **kwargs):
+	if created:
+		referral = Referral.create(
+			user=instance,
+			redirect_to="/subscribe/"
+			)
+		UserProfile.objects.create(user=instance,referral=referral)
+
+post_save.connect(create_user_profile, sender=User)
+
 
 class Subscription(models.Model):
 	# PK is order number, automatic field??

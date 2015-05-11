@@ -7,7 +7,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from subscribe.models import SubscriptionForm, Subscription, SubscriptionRecord
 
 
-# Create your views here.
+from anafero.models import Referral
+
 # def index(request):
 # 	return render(request, 'members/attribute.html')
 
@@ -26,8 +27,7 @@ def index(request):
 				# c['login_message'] = "success!"
 		else:
 			c['member_login_message'] = u"您的用户名和密码不匹配"
-			
-
+	# print request.user.get_profile().referral
 	return render(request, 'members/memberIndex.html', c)
 
 
@@ -49,7 +49,6 @@ def register_member(request):
 			return render(request, 'members/memberIndex.html', c)			
 
 		password = request.POST['password']
-		# phone = request.POST['phonenumber']
 
 		newUser = User.objects.create_user(email, email, password)
 		newUser.save()	
@@ -97,5 +96,9 @@ def reset_password(request):
 				{'resetpwd_msg' : u'旧密码不正确', 'member_resetpwd_isPOST':True}) 
 
 	return HttpResponseRedirect('/members/')
+
+
+def refer(request):
+	return render(request, 'members/refer.html')
 
 

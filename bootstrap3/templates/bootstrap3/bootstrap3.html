@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% load bootstrap3 %}
 <html{% if request.LANGUAGE_CODE %} lang="{{ request.LANGUAGE_CODE }}"{% endif %}>
-
+<html xmlns:wb="http://open.weibo.com/wb">
 <head>
     <meta charset="utf-8">
     <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge" /><![endif]-->
@@ -39,6 +39,9 @@
 
     <!--this js is for form validation-->
     <script type="text/javascript" src="/static/formValidation/js/framework/bootstrap.js"></script>
+
+    <!-- weibo -->
+    <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
 
 
 {% block base_scripts %}

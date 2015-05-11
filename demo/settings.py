@@ -15,8 +15,11 @@ if BOOTSTRAP3_FOLDER not in sys.path:
 #for i in sys.path:
 #    print i
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+# additional information tied to a User
+# AUTH_PROFILE_MODULE = 'subscribe.UserProfile'
+
+# DEBUG = True
+# TEMPLATE_DEBUG = DEBUG
 
 ADMINS = ()
 
@@ -71,6 +74,7 @@ STATIC_ROOT = ''
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
+
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -96,6 +100,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    "anafero.middleware.SessionJumpingMiddleware",
 
 )
 
@@ -123,8 +129,9 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     
     'bootstrap3',
+    'anafero',
+
     'demo',
-    
     'subscribe',
     'members',
 )
