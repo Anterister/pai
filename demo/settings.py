@@ -18,8 +18,8 @@ if BOOTSTRAP3_FOLDER not in sys.path:
 # additional information tied to a User
 # AUTH_PROFILE_MODULE = 'subscribe.UserProfile'
 
-# DEBUG = True
-# TEMPLATE_DEBUG = DEBUG
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
 
 ADMINS = ()
 
@@ -32,7 +32,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', ]
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '127.0.1.1', '121.40.168.84', 'www.petybox.com']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
