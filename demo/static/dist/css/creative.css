@@ -395,6 +395,21 @@ fieldset[disabled] .btn-default.active {
     transition: all .35s;
 }
 
+.btn-primary-blue {
+    border-color: #24249c;
+    color: #fff;
+    background-color: #24249c;
+    -webkit-transition: all .35s;
+    -moz-transition: all .35s;
+    transition: all .35s;
+    font-size: 24px;
+}
+
+.btn-primary-blue:hover {
+    background-color: #020259;
+    color: #fff;
+}
+
 
 
 .btn-primary:focus,

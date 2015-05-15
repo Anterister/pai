@@ -6,14 +6,20 @@
 {% block content %}
 <script>
 $(document).ready(function() {
-  $('.parallax-window').parallax({
-    imageSrc: '/static/demo/images/cover.jpg', 
-    speed:0.4
-  });
+  // $('.parallax-window').parallax({
+  //   imageSrc: '/static/demo/images/DogBackground.png', 
+  //   speed:0.7,
+  // });
+// document.getElementById('IntroBackground').style.backgroundImage =  'url(/static/demo/images/DogBackground.png)';
 });
 </script>
 
 <style type="text/css">
+  .parallax-window {
+    background: url('../static/demo/images/DogBackground.png');
+    background-position: 0% 43%;
+  }
+
 
   .jumbotron {
     border-radius: 15px;
@@ -61,6 +67,8 @@ $(document).ready(function() {
 body {
     padding-top: 0px;
 }
+
+
 </style>
     
     <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -70,14 +78,14 @@ body {
         <div class="spacer"></div>
         <div class="container injumbotron">
           <div class="spacer"></div>
-            <h1 class="text-center title-text">给您的狗狗每月一个惊喜!</h1>
+            <h1 class="text-center title-text"><b>给您的狗狗每月一个惊喜!</b></h1>
           <div class="spacer"></div>
 
 
-          <p class="text-center"><a class="btn btn-primary btn-lg" href="/subscribe/" role="button">一元试用 &raquo;</a></p>
+          <p class="text-center"><a class="btn btn-primary-blue btn-lg" href="/subscribe/" role="button">一元试用&raquo;</a></p>
           <div class="row">
             <div class='col-md-4'>
-              <h3 class="title-text">
+              <!-- <h3 class="title-text">
                 累计向宠物慈善组织捐助: 
               </h3>
               <h3>
@@ -88,20 +96,18 @@ body {
                 .
                 <span class="moneyCount">2</span>
                 <span class="moneyCount">2</span>
-              </h3>
+              </h3> -->
             </div>
             <div class='col-md-4' >
                         
-          <div class="progress">
+          <!-- <div class="progress">
             <span style="color:black">剩余416个一元礼盒</span>
             <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar"
             aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:18%">
               18%
             </div>
-          </div>
-           <!--  <h3 class="text-center">
-                已经送出86个一元礼盒
-            </h3> -->
+          </div> -->
+
             </div>
             <div class="col-md-4">
 
