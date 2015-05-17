@@ -39,9 +39,9 @@ $(document).ready(function() {
     width: 90%;
   }
 
-/*  #Intro {
-     background-color: #f05f40;
-  }*/
+  #Intro {
+     background-color: transparent;
+  }
 
   #IntroBackground { 
     /*background: url('../static/demo/images/DogBackground_sm.png');*/
@@ -64,9 +64,8 @@ $(document).ready(function() {
     font: 24px Arial, sans-serif;
   }
 
-
 body {
-    padding-top: 120px;
+    padding-top: 0px;
 }
 
 
@@ -83,7 +82,7 @@ body {
           <div class="spacer"></div>
 
 
-          <p class="text-center"><a class="btn btn-primary btn-lg" href="/subscribe/" role="button">一元试用&raquo;</a></p>
+          <p class="text-center"><a class="btn btn-primary-blue btn-lg" href="/subscribe/" role="button">一元试用&raquo;</a></p>
           <div class="row">
             <div class='col-md-4'>
               <!-- <h3 class="title-text">
@@ -124,65 +123,80 @@ body {
 
 {% endblock %}
 
-{% block white_section %}
+{% block extra_content %}
+
+    <div class="backgroundWhite">
       <div class="container">
         <div class="spacer"></div>
 
         <div class="row">
-          <div class="col-md-3">
-            <img src="/static/demo/images/bulldogs/1.jpg" style="height: 180px; width:150">
+          <div class="col-md-6">
+            <img src="/static/demo/images/scroll.gif">
           </div>
-          <div class="col-md-3">
-            <img src="/static/demo/images/bulldogs/2.jpg" style="height: 180px; width:150">
-          </div>
-          <div class="col-md-3">
-            <img src="/static/demo/images/bulldogs/3.jpg" style="height: 180px; width:150">
-          </div>
-          <div class="col-md-3">
-            <img src="/static/demo/images/bulldogs/4.jpg" style="height: 180px; width:150">
+          <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <img src="/static/demo/images/instruction1.png" style="height: 180px; width:150">
+                <p>我们提供了一个月、三个月与六个月的订购方案！完全免运费！可随时取消或续订！ </p>
+              </div>
+              <div class="col-md-6">
+                <img src="/static/demo/images/instruction1.png" style="height: 180px; width:150">
+                <p>我们提供了一个月、三个月与六个月的订购方案！完全免运费！可随时取消或续订！</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <img src="/static/demo/images/instruction1.png" style="height: 180px; width:150">
+                <p>我们提供了一个月、三个月与六个月的订购方案！完全免运费！可随时取消或续订！</p>
+              </div>
+              <div class="col-md-6">
+                <img src="/static/demo/images/instruction1.png" style="height: 180px; width:150">
+                <p>我们提供了一个月、三个月与六个月的订购方案！完全免运费！可随时取消或续订！</p>
+              </div>
+            </div>
+            
           </div>
         </div>
-        <div class="spacer"></div>
-      </div>
-{% endblock %}
 
-{% block orange_section %}
-    <div class="container">
-      <div class="spacer"></div>
+        <div class="spacer"></div>
+
 
         <!-- Example row of columns -->
-      <div class="container-fluid">
         <div class="row">
           <div class="col-md-4">
             <h2>宝盒订阅说明</h3>
           </div>
         </div>
-        <div class="row spacer"></div>
         <div class="row">
           <div class="col-md-4">
-            
-            <img src="/static/demo/images/instruction1.png" class="img-circle">
-            <h3 class="text-center">1. 选择体型</h2>
+            <h2>1.选择体型</h2>
             <p>选择毛宝贝的体型，我们会依照毛宝贝的体型来配出最适合牠的宝盒！ </p>
-
+            <img src="/static/demo/images/instruction1.png" class="img-thumbnail">
           </div>
           <div class="col-md-4">
-            
-            <img src="/static/demo/images/instruction2.png" class="img-circle">
-            <h3 class="text-center">2. 选择订阅期</h2>
+            <h2>2.选择订阅期</h2>
             <p>我们提供了一个月、三个月与六个月的订购方案！完全免运费！可随时取消或续订！</p>
-
+            <img src="/static/demo/images/instruction2.png" class="img-thumbnail">
          </div>
           <div class="col-md-4">
-
-            <img src="/static/demo/images/instruction3.png" class="img-circle">
-            <h3 class="text-center">3. 期待每月的惊喜</h2>
+            <h2>3.期待每月的惊喜</h2>
             <p>礼盒会在每月15号寄出！准备与狗宝贝一起迎接[派星宝盒]带来的互动新体验吧!</p>
-
+            <img src="/static/demo/images/instruction3.png" class="img-thumbnail">
           </div>
         </div>
         <div class="spacer"></div>
+
+      </div> <!-- /container -->
+
+
+      <hr>
+      <div class="container">
+        <wb:follow-button uid="5598604199" type="red_1" width="100" height="24" ></wb:follow-button>
+          <img src="/static/demo/images/icons/weibo.svg" alt="weibo">
+          <img src="/static/demo/images/icons/wechat.svg" alt="wechat">
+          <img src="/static/demo/images/icons/instagram.svg" alt="instagram">
+          <img src="/static/demo/images/icons/zhihu.svg" alt="zhihu">
       </div>
-    </div>
+    </div> <!--white background-->
 
 {% endblock %}
